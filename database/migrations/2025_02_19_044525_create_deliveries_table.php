@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('height');
             $table->string('width');
             $table->string('weight');
-            $table->enum('status', ['pending', 'cancel', 'shipped', 'completed'])->default('pending');
+            $table->enum('status', ['pending', 'cancel', 'shipped', 'processed'])->default('pending');
             $table->timestamps();
         });
     }

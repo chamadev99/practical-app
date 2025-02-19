@@ -173,7 +173,64 @@ class DeliveryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @OA\Put(
+     *     path="/edit-delivery/{id}",
+     *     summary="Cancel a pending delivery",
+     *     description="Cancels a delivery request if it is still in 'pending' status",
+     *     operationId="editDelivery",
+     *     tags={"Delivery"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Delivery ID",
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Delivery request successfully cancelled",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Delivery item has been successfully cancelled"),
+     *             @OA\Property(property="data", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="status", type="string", example="cancel"),
+     *                 @OA\Property(property="pickup_address", type="string", example="123 Main St"),
+     *                 @OA\Property(property="delivery_address", type="string", example="456 Elm St"),
+     *                 @OA\Property(property="type_of_goods", type="string", example="Parcel"),
+     *                 @OA\Property(property="deliver_provider", type="string", example="DHL"),
+     *                 @OA\Property(property="priority", type="string", example="Standard"),
+     *                 @OA\Property(property="shipment_pickup_date", type="string", format="date", example="2024-12-05"),
+     *                 @OA\Property(property="shipment_pickup_time", type="string", example="10:05"),
+     *                 @OA\Property(property="description", type="string", example="Electronics"),
+     *                 @OA\Property(property="length", type="integer", example=150),
+     *                 @OA\Property(property="height", type="integer", example=150),
+     *                 @OA\Property(property="width", type="integer", example=150),
+     *                 @OA\Property(property="weight", type="integer", example=150),
+     *                 @OA\Property(property="created_at", type="string", format="date-time", example="2024-12-05T10:00:00Z"),
+     *                 @OA\Property(property="updated_at", type="string", format="date-time", example="2024-12-05T10:05:00Z")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Delivery request already shipped or processed",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=false),
+     *             @OA\Property(property="message", type="string", example="Delivery item has been already shipped or processed"),
+     *             @OA\Property(property="data", type="object", example=null)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Failed to fetch delivery list",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=false),
+     *             @OA\Property(property="message", type="string", example="Failed to fetch delivery list"),
+     *             @OA\Property(property="error", type="string", example="Internal Server Error")
+     *         )
+     *     )
+     * )
      */
     public function edit($delivery)
     {
@@ -192,7 +249,7 @@ class DeliveryController extends Controller
             } else {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Delivery item has been already shipped or completed',
+                    'message' => 'Delivery item has been already shipped or processed',
                     'data' => $delivery
                 ], 400);
             }
