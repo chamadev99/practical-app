@@ -1,0 +1,318 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "description": "This is the API documentation for practical assignment application.",
+        "contact": {
+            "email": "chamathpk1991@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/all-delivery-list": {
+            "get": {
+                "tags": [
+                    "all-delivery-list"
+                ],
+                "summary": "show all delivery list",
+                "description": "Show all delivery lists.",
+                "operationId": "9972aaa76f97e1e8b5a02743586df578",
+                "responses": {
+                    "200": {
+                        "description": "all-delivery-list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": "list"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to fetch delivery list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to fetch delivery list"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/add-delivery": {
+            "post": {
+                "tags": [
+                    "Delivery"
+                ],
+                "summary": "Create a new delivery request",
+                "description": "Stores a new delivery request in the system",
+                "operationId": "storeDelivery",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "pickup_address",
+                                    "pickup_name",
+                                    "pickup_contact_no",
+                                    "delivery_address",
+                                    "delivery_name",
+                                    "delivery_contact_no",
+                                    "type_of_goods",
+                                    "deliver_provider",
+                                    "priority",
+                                    "shipment_pickup_date",
+                                    "shipment_pickup_time",
+                                    "description",
+                                    "length",
+                                    "height",
+                                    "width",
+                                    "weight"
+                                ],
+                                "properties": {
+                                    "pickup_address": {
+                                        "type": "string",
+                                        "example": "123 Main St"
+                                    },
+                                    "pickup_name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "pickup_contact_no": {
+                                        "type": "string",
+                                        "example": "123456789"
+                                    },
+                                    "delivery_address": {
+                                        "type": "string",
+                                        "example": "456 Elm St"
+                                    },
+                                    "delivery_name": {
+                                        "type": "string",
+                                        "example": "Jane Smith"
+                                    },
+                                    "delivery_contact_no": {
+                                        "type": "string",
+                                        "example": "987654321"
+                                    },
+                                    "type_of_goods": {
+                                        "type": "string",
+                                        "example": "Parcel"
+                                    },
+                                    "deliver_provider": {
+                                        "type": "string",
+                                        "example": "DHL"
+                                    },
+                                    "priority": {
+                                        "type": "string",
+                                        "example": "Standard"
+                                    },
+                                    "shipment_pickup_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-12-05"
+                                    },
+                                    "shipment_pickup_time": {
+                                        "type": "string",
+                                        "example": "10:05"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Electronics"
+                                    },
+                                    "length": {
+                                        "type": "integer",
+                                        "example": 150
+                                    },
+                                    "height": {
+                                        "type": "integer",
+                                        "example": 150
+                                    },
+                                    "width": {
+                                        "type": "integer",
+                                        "example": 150
+                                    },
+                                    "weight": {
+                                        "type": "integer",
+                                        "example": 150
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Delivery request successfully created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Delivery request has been successfully created"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "pickup_address": {
+                                                    "type": "string",
+                                                    "example": "123 Main St"
+                                                },
+                                                "pickup_name": {
+                                                    "type": "string",
+                                                    "example": "John Doe"
+                                                },
+                                                "pickup_contact_no": {
+                                                    "type": "string",
+                                                    "example": "123456789"
+                                                },
+                                                "delivery_address": {
+                                                    "type": "string",
+                                                    "example": "456 Elm St"
+                                                },
+                                                "delivery_name": {
+                                                    "type": "string",
+                                                    "example": "Jane Smith"
+                                                },
+                                                "delivery_contact_no": {
+                                                    "type": "string",
+                                                    "example": "987654321"
+                                                },
+                                                "type_of_goods": {
+                                                    "type": "string",
+                                                    "example": "Parcel"
+                                                },
+                                                "deliver_provider": {
+                                                    "type": "string",
+                                                    "example": "DHL"
+                                                },
+                                                "priority": {
+                                                    "type": "string",
+                                                    "example": "Standard"
+                                                },
+                                                "shipment_pickup_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-12-05"
+                                                },
+                                                "shipment_pickup_time": {
+                                                    "type": "string",
+                                                    "example": "10:05"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Electronics"
+                                                },
+                                                "length": {
+                                                    "type": "integer",
+                                                    "example": 150
+                                                },
+                                                "height": {
+                                                    "type": "integer",
+                                                    "example": 150
+                                                },
+                                                "width": {
+                                                    "type": "integer",
+                                                    "example": 150
+                                                },
+                                                "weight": {
+                                                    "type": "integer",
+                                                    "example": 150
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-12-05T10:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-12-05T10:00:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to create delivery request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to create delivery request"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Internal Server Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "all-delivery-list",
+            "description": "all-delivery-list"
+        },
+        {
+            "name": "Delivery",
+            "description": "Delivery"
+        }
+    ]
+}
