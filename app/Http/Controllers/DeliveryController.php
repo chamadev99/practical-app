@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Delivery;
+use App\Http\Resources\OrderResources;
+use App\Http\Resources\Order;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDeliveryRequest;
 
@@ -55,10 +57,15 @@ class DeliveryController extends Controller
     public function index()
     {
         try {
-            $deliveries = Delivery::all();
+            $deliveries = Delivery::paginate(10);
+
+            // return   response()->json(['data' => OrderResources::collection($deliveries)]);
             return response()->json([
                 'success' => true,
-                'data' => $deliveries
+                // 'data' =>  new Order($deliveries),
+                'data' =>  $deliveries,
+                'data' =>  OrderResources::collection($deliveries),
+                //'data' => new OrderResources($deliveries)
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
